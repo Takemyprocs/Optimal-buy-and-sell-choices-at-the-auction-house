@@ -1,2 +1,2 @@
-# Optimal-buying-and-selling-at-the-auction-house
-We approach buying and selling decisions at the auction house as a linear programming problem.
+# Optimal-buy-and-sell-at-the-auction-house
+We model buying and selling choices at the auction house by using a linear programming approach.
