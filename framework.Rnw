@@ -14,8 +14,9 @@
 
 \maketitle
 
-\section{The Seller Problem: a basic framework}
+\abstract{At first, we deal with a simplified case of the buyer-seller problem which we refer as The Seller Problem. We provide a simple model along with an illustrative application. Then, we depart from this basic framework to deal with more realistic scenarios where the decision maker jointly determines buying and selling choices. Finally, we discuss some issues on the buying and selling process that are not related to the choice problem.}
 
+\section{The Seller Problem: a basic framework}
 Suppose a seller is endowed with a fixed amount of $m$ inputs, namely: $s_1, s_2,...,s_m$. With them the seller can craft $n$ products, namely: $x_1,x_2,...,x_n$. Not all inputs may be required for crafting a particular product, so we define $A$ as the technical matrix that captures the input requirements for each output:
 
 \[
@@ -25,7 +26,7 @@ A =
 \begin{block}{c(cccc)}
   s_1 & a_{11} & a_{12} & ...    & a_{1n} \\
   s_2 & a_{21} & a_{22} & ...    & a_{2n} \\
-  ... & ...    & ...    & \ddots & ... \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
   s_m & a_{m1} & a_{m2} & ...    & a_{mn} \\
 \end{block}
 \end{blockarray}
@@ -39,7 +40,7 @@ Given those conditions, we can write the seller problem as follows:
 \max_{x_1,x_2,...,x_n} \quad & p_1x_1 + p_2x_2 + ... + p_nx_n \\
 \textrm{s.t.} \quad & a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n \leq s_1\\
   &a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n \leq s_2\\
-  &\cdots \\
+  &\vdots \\
   &a_{m1}x_1 + a_{m2}x_2 + ... + a_{mn}x_n \leq s_m\\
   &x_1,x_2,...,x_n\geq0    \\
 \end{aligned}
@@ -78,7 +79,8 @@ Finally, market prices for products 1 to 6 are $100.2$, $80$, $110.96$, $120.11$
 \end{aligned}
 \end{equation}
 
-We use the package \texttt{lpSolve} (linear programming) in the R environment to solve this problem. As shown below, our code\footnote{See the seller.R script in GitHub.} provides us with optimal quantities for every product. Notice that quantity for product $x_5$ is null, this is an example of \textit{corner solution} which is very common in the linear programming framework. This solution implies that, at faced prices, endowments and current technical requirements, is not profitable to craft product $x_5$ at all. 
+We use the package \texttt{lpSolve} (linear programming) in the R environment to solve this problem. As shown below, our code\footnote{See the seller.R script in GitHub.} provides us with optimal quantities for every product.
+
 <<echo = FALSE>>=
 # prices
 p1 <- 100.2
@@ -128,8 +130,38 @@ output
 
 \newpage
 
-\section{Some extentions}
-Insofar we have described a basic framework of the seller problem. Under this model we assumed that inputs cannot be sold in the market like products, also we 
+Notice that quantity for product $x_5$ is null, this is an example of \textit{corner solution} which is very common in the linear programming framework. This solution implies that, at faced prices, endowments and current technical requirements, is not profitable to craft product $x_5$ at all. It is worth noting that although we use a linear programming approach what we use indeed is an \textit{integer programming} approach without loss of generality. The difference lies in the solution's domain, while linear programming admits solutions in the real domain, integer programming offers solutions within the integer domain which is a more realistic approach (Who would sugest you to produce $\pi$ units of any product?).
 
+\section{Some extentions}
+Insofar we have described a basic framework of the seller problem. Under this model we assumed that inputs cannot be sold in the market as we do with products. Also we have not considered the possibility of purchasing inputs in the market and then crafting products with them. In this section we make some departures from the basic framework to land into a more realistic trading scenario.
+
+\subsection{What if we sell inputs as well?}
+We extend the previous model by including the possibility to sell inputs directly through the market and not only use them for crafting purposes. This is easily done by attaching an identity matrix to our technical matrix, which is equivalent to add $m$ extra products that uses $1$ unit of each input. Put in simple, to "craft" and sell $1$ unit of input $s_i$ we require $1$ unit of input $i$ and $0$ units of the remain inputs. The new technical matrix looks as follows:
+
+\[
+A = 
+\begin{blockarray}{ccccccccc}
+& x_1 & x_2 & ... & x_n & \bar{s}_1 & \bar{s}_2 & ... & \bar{s}_m \\
+\begin{block}{c(cccccccc)}
+  s_1 & a_{11} & a_{12} & ...    & a_{1n} & 1 & 0 & ... & 0 \\
+  s_2 & a_{21} & a_{22} & ...    & a_{2n} & 0 & 1 & ... & 0 \\
+  \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+  s_m & a_{m1} & a_{m2} & ...    & a_{mn} & 0 & 0 & ... & 1 \\
+\end{block}
+\end{blockarray}
+ \]
+ 
+At this point we must distinguish between the quantity of input $i$ that we choose to sell in the market, which we denote as $\bar{s}_i$, and the available stock of input $i$, which we still refer to as $s_i$. Finally, assume that along with product prices $p_1, p_2, ..., p_n$ we are facing the following prices for inputs: $r_1, r_2, ..., r_m$. Given those conditions, we reformulate our problem as follows:
+
+\begin{equation}
+\begin{aligned}
+\max_{x_1,x_2,...,x_n,\bar{s}_1,\bar{s}_2,...,\bar{s}_m} \quad & p_1x_1 + p_2x_2 + ... + p_nx_n + r_1\bar{s}_1 + r_2\bar{s}_2 + ... + r_m\bar{s}_m \\
+\textrm{s.t.} \quad & a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n + \bar{s}_1 \leq s_1\\
+  &a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n + \bar{s}_2 \leq s_2\\
+  &\vdots \\
+  &a_{m1}x_1 + a_{m2}x_2 + ... + a_{mn}x_n + \bar{s}_m \leq s_m\\
+  &x_1,x_2,...,x_n,\bar{s}_1,\bar{s}_2,...,\bar{s}_m\geq0    \\
+\end{aligned}
+\end{equation}
 
 \end{document}
