@@ -164,4 +164,38 @@ At this point we must distinguish between the quantity of input $i$ that we choo
 \end{aligned}
 \end{equation}
 
+Notice that the objective function (or revenue function if you prefer) is now composed by earnings coming from both product and input sales. Also, inputs are now allocated in either product crafting or direct sale. This last condition is captured along the $m$ declared constraints \footnote{Take a look at our script sell\_inputs.R in GitHub for an application of this model}.
+
+\subsection{What if we buy inputs?}
+Now suppose we came back to the situation where we cannot sell inputs but we are able to buy them in order to craft and sell products. Of course, we cannot buy inputs indefinitively as we may have a budget constraint so we introduce capital $K$ as a new parameter in the model. For the sake of simplicity, we understand capital as available cash to buy items (like inputs in our model). Technology stays the same so we adopt the technical matrix described in section 1:  
+
+\[
+A = 
+\begin{blockarray}{ccccc}
+& x_1 & x_2 & ... & x_n \\
+\begin{block}{c(cccc)}
+  \bar{s}_1 & a_{11} & a_{12} & ...    & a_{1n} \\
+  \bar{s}_2 & a_{21} & a_{22} & ...    & a_{2n} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  \bar{s}_m & a_{m1} & a_{m2} & ...    & a_{mn} \\
+\end{block}
+\end{blockarray}
+ \]
+
+However, it is worth noting that instead of having exogenous input quantities $s_i$ we simultaneously determine product and input quantities. Therefore, we use the $\hat{s}_i$ notation to indicate that input availability is endogenous and determined within the model. Finally, we assume that along with product prices $p_1, p_2, ..., p_n$ we are facing the following prices for inputs: $r_1, r_2, ..., r_m$. Given those conditions, we reformulate our problem as follows:
+
+\begin{equation}
+\begin{aligned}
+\max_{x_1,x_2,...,x_n,\bar{s}_1,\bar{s}_2,...,\bar{s}_m} \quad & p_1x_1 + p_2x_2 + ... + p_nx_n - r_1\bar{s}_1 - r_2\bar{s}_2 - ... - r_m\bar{s}_m \\
+\textrm{s.t.} \quad & a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n - \bar{s}_1 \leq 0\\
+  &a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n - \bar{s}_2 \leq 0\\
+  &\vdots \\
+  &a_{m1}x_1 + a_{m2}x_2 + ... + a_{mn}x_n - \bar{s}_m \leq 0\\
+  &r_1\bar{s}_1 + r_2\bar{s}_2 + ... + r_m\bar{s}_m \leq K \\
+  &x_1,x_2,...,x_n,\bar{s}_1,\bar{s}_2,...,\bar{s}_m\geq0    \\
+\end{aligned}
+\end{equation}
+
+In this case the objective function is composed by overall earnings due to product sales and the overall spending due to input purchases. Regarding constraints, we see that input availability depends on the input purchase decision while this in turn is limited by the capital budget \footnote{See the script seller\_buyer.R in GitHub for an application of this model}.
+
 \end{document}
