@@ -8,29 +8,29 @@ library(lpSolve)
 # 1.1. Output prices
 # p1: Potion of spectral agility price
 # p2: Potion of spectral stamina price
-# p3: Potion of spectral stamina price
+# p3: Potion of spectral strength price
 # p4: Potion of spectral intellect price
 # p5: Spectral flask of stamina price
 # p6: Spectral flask of power price
-p1 <- 105.44
-p2 <- 97
-p3 <- 111
-p4 <- 120.11
-p5 <- 119.99
-p6 <- 313.9
+p1 <- 116.91
+p2 <- 72.14
+p3 <- 107.98
+p4 <- 114.98
+p5 <- 140
+p6 <- 299.99
 # 1.2. Input costs
 # r1: Widowbloom price
 # r2: Vigil's torch price
 # r3: Rising glory price
 # r4: Marrowroot price
 # r5: Nightshade price
-r1 <- 16.35
-r2 <- 7.15
-r3 <- 20.97
-r4 <- 19
-r5 <- 9.25
+r1 <- 17.99
+r2 <- 9
+r3 <- 17.49
+r4 <- 19.88
+r5 <- 8.55
 # 1.3. Capital budget
-K <- 29784
+K <- 35823
 
 # 2. Setting objective function coefficients
 f.obj <- c(p1, p2, p3, p4, p5, p6, (-1)*r1, (-1)*r2, (-1)*r3, (-1)*r4, (-1)*r5)

@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930) (preloaded format=pdflatex 2019.1.9)  10 SEP 2021 23:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930) (preloaded format=pdflatex 2019.1.9)  21 SEP 2021 19:30
 entering extended mode
-**./framework.tex
-(framework.tex
+**./uncertainty_intermediate_inputs.tex
+(uncertainty_intermediate_inputs.tex
 LaTeX2e <2018-12-01>
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls
 "
@@ -208,6 +208,12 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \mathdisplay@stack=\toks25
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
+) ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/bbm\bbm.sty"
+Package: bbm 1999/03/15 V 1.2 provides fonts for set symbols - TH
+LaTeX Font Info:    Overwriting math alphabet `\mathbbm' in version `bold'
+(Font)                  U/bbm/m/n --> U/bbm/bx/n on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
+(Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
 ) (C:/PROGRA~1/R/R-35~1.2/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
@@ -426,28 +432,28 @@ LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 LaTeX Font Info:    Try loading font information for T1+aer on input line 105.
  ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
-)))) (framework.aux)
-\openout1 = `framework.aux'.
+)))) (uncertainty_intermediate_inputs.aux)
+\openout1 = `uncertainty_intermediate_inputs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 15.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    ... okay on input line 15.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -550,62 +556,58 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-) (framework-concordance.tex)
-LaTeX Font Info:    Try loading font information for U+msa on input line 16.
+) (uncertainty_intermediate_inputs-concordance.tex)
+LaTeX Font Info:    Try loading font information for U+msa on input line 18.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 "
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 16.
+LaTeX Font Info:    Try loading font information for U+msb on input line 18.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd
 "
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 36--39
-
- []
-
-[1
+LaTeX Font Info:    Try loading font information for U+bbm on input line 32.
+ ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/bbm\ubbm.fd"
+File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
+) [1
 
 {C:/Users/Usuario/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 83.
-
-("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-)
-[2] [3] [4] (framework.aux) ) 
+[2] [3] [4] [5] (uncertainty_intermediate_inputs.aux) ) 
 Here is how much of TeX's memory you used:
- 5086 strings out of 492942
- 70297 string characters out of 3125202
- 145163 words of memory out of 3000000
- 8832 multiletter control sequences out of 15000+200000
- 44894 words of font info for 100 fonts, out of 3000000 for 9000
+ 5077 strings out of 492942
+ 70668 string characters out of 3125202
+ 143355 words of memory out of 3000000
+ 8810 multiletter control sequences out of 15000+200000
+ 49499 words of font info for 111 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,39p,760b,217s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Usuario/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Usuario/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/U
-sers/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi6.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Usuario/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Usuario/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Usu
-ario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb
-><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmr6.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Usuario/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Usuario/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users
-/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt1
-0.pfb>
-Output written on framework.pdf (4 pages, 176643 bytes).
+ 41i,20n,39p,985b,231s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Usuario\AppDa
+ta\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi657\bbm10.pk> <C:\Users\Usuar
+io\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi600\bbm8.pk><C:/Users
+/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmbx12.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Usuario/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Usuario/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Usua
+rio/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
+<C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmr10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Usuario/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Usuario/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/U
+suario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
+b><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 
+2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on uncertainty_intermediate_inputs.pdf (5 pages, 172720 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
+ 89 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  5 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -8,7 +8,7 @@ library(lpSolve)
 # 1.1. Output prices
 # p1: Potion of spectral agility price
 # p2: Potion of spectral stamina price
-# p3: Potion of spectral stamina price
+# p3: Potion of spectral strength price
 # p4: Potion of spectral intellect price
 # p5: Spiritual healing potion price
 # p6: Spectral flask of stamina price
@@ -19,19 +19,19 @@ library(lpSolve)
 # p11: Marrowroot price
 # p12: Nightshade price
 # p13: Death blossom price
-p1 <- 140.97
-p2 <- 40.66
-p3 <- 125.48
-p4 <- 149.75
-p5 <- 18.82
-p6 <- 280.97
-p7 <- 350.96
-p8 <- 16.84
-p9 <- 9.92
-p10 <- 19.95
-p11 <- 29.99
-p12 <- 10.89
-p13 <- 3.79
+p1 <- 155.95
+p2 <- 72.14
+p3 <- 107.99
+p4 <- 114.99
+p5 <- 14
+p6 <- 160
+p7 <- 320
+p8 <- 18
+p9 <- 10.3
+p10 <- 17.75
+p11 <- 20
+p12 <- 10.93
+p13 <- 3.48
 # 1.2. Input stock
 # s1: Widowbloom stock
 # s2: Vigil's torch stock
@@ -39,12 +39,12 @@ p13 <- 3.79
 # s4: Marrowroot stock
 # s5: Nightshade stock
 # s6: Death blossom stock
-s1 <- 226
-s2 <- 370
-s3 <- 223
-s4 <- 127
-s5 <- 246
-s6 <- 714
+s1 <- 150
+s2 <- 195
+s3 <- 253
+s4 <- 132
+s5 <- 96
+s6 <- 596
 
 # 2. Setting objective function coefficients
 f.obj <- c(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)

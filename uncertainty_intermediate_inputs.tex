@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}         % the type of document and font size (default 10pt)
+\usepackage[margin=1.0in]{geometry}   % sets all margins to 1in, can be changed
+\usepackage{moreverb}                 % for verbatimtabinput -- LaTeX environment
+\usepackage{amssymb}                  % for many mathematical symbols
+\usepackage[pdftex]{lscape}           % for landscaped tables
+\usepackage{longtable}                % for tables that break over multiple pages
+\usepackage{blkarray}
+\usepackage{amsmath}
+\usepackage{bbm}
+\DeclareMathOperator*{\plim}{plim}
+
+\title{Modelling uncertainty in the production process}
+\author{Takemyprocs}
+\usepackage{Sweave}
+\begin{document}
+\input{uncertainty_intermediate_inputs-concordance}
+
+\maketitle
+
+\abstract{We use probability theory and statistics to provide a framework to tackle uncertainty in production. In particular, we focus on the problem of getting an uncertain amount of product given a fixed amount of inputs. Therefore, we ignore the production process itself and treat it like it was a black box. We discuss uncertainty of the product distribution in terms of its mean and variance. Then, we apply this framework to intermediate inputs within a stochastic optimization problem.}
+
+\section{A parametric model for stochastic products}
+Suppose we use a fixed integer quantity of a single input to procuce random integer quantities for $n$ different products. Also, assume the maximum attainable quantity for every output is fixed at the integer value $M$. Therefore, every time we engage into the production process we end up with an output vector where each element $x_i\in \mathbb{Z}$ oscillates within the interval $[0,M]$. Although we can jointly model all products, we decided to work with a more parsimonious approach. Concretely, we assume that product outcomes processes are independent but not identical between them. If they truly are, we can safely ignore any correlation between product outcomes.
+
+\subsection{The categorical distribution}
+We model a representative product outcome as coming from a categorical distribution, a discrete probability distribution. The categorial distribution can be viewed as a special case of the multinomial distribution with a single drawing. The probability mass function (PMF) for this distribution is the following:
+
+\begin{equation}
+\begin{split}
+f(x\vert p_1,p_2,...,p_M) = p_0^{\mathbbm{1}[x=0]} & p_1^{\mathbbm{1}[x=1]}p_2^{\mathbbm{1}[x=2]}...p_M^{\mathbbm{1}[x=M]} = \prod_{j=0}^M p_j^{\mathbbm{1}[x=j]} \\
+&\sum_{j=0}^M p_j = 1
+\end{split}
+\end{equation}
+
+where the product $x$ can take values from $0$ to $M$, and $\mathbbm{1}[\cdot]$ is the indicator function\footnote{This function takes the value of $1$ when the argument is true, otherwise is equal to $0$}. Also, for notation simplicity we define $p_j:=$ Pr$(x=j)$. Some outcomes may be more likely to occur than others so in general $p_j$ lies within the $[0,1]$ range and all probabilities add up to $1$. To this point, we must stress the fact that what we are indeed proposing is a finite count distribution to model the product quantity, customary choices are the binomial distribution or the beta-binomial distribution. However, such distributions imposes a common structure to all probabilities. Although we use the categorical distribution, we do not attemp to treat the outcome as a categorical variable but rather treat it as a integer or count variable with no a priori assumptions over the probability of ocurrence.
+
+\section{Estimation}
+Now we are ready to use real data in order to estimate the categorical distribution parameters (outcome probabilities). We adopt a maximum likelihood estimation (MLE) approach, that is we aim to find a set of parameter that maximize the likelihood of obtaining the real data. Before we derive the likelihood function for the categorical distribution, keep in mind that for a single event (production process) we can obtain 1 out of $M+1$ results (from $0$ to $M$) in terms of product, so we can arrange our data as follows:
+
+\[
+\begin{blockarray}{ccccc}
+& x=0 & x=1 & ... & x=M \\
+\begin{block}{c(cccc)}
+  i=1 & 0 & 1 & ...    & 0 \\
+  i=2 & 1 & 0 & ...    & 0 \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  i=N & 0 & 0 & ...    & 1 \\
+\end{block}
+\end{blockarray}
+ \]
+
+\subsection{Log-likelihood function}
+
+On every single event $i$ we end up with one and only one of the $M+1$ possible results. We use a binary indicator to highlight the outcome we obtained on that event. To deriver the likelihood function $\mathcal{L}(\cdot)$ we start by writing the PMF for the categorical function, but we instead treat data as given rather than parameters:
+
+\begin{equation}
+\mathcal{L}(p_0,p_1,...,p_M\vert x) = \prod_{i=1}^N \left(\prod_{j=0}^M p_j^{\mathbbm{1}[x_i=j]}\right)
+\end{equation}
+
+Here we use $x_i$ to denote the $x$ outcome in the $i$-th event. Now, is customary to deal with the log-likelihood function instead of the likelihood one. The reason lies in the simplicity of computation once we use a mathematical program to estimate parameters, also recall that the $\log$ function is a monotone transformation so optimize $\log\mathcal{L}$ is equivalent to optimize $\mathcal{L}$.
+
+\begin{equation}
+\log\mathcal{L}(p_0,p_1,...,p_M\vert x) = \sum_{i=1}^N \left(\sum_{j=0}^M \mathbbm{1}[x_i=j]\log p_j\right)
+\end{equation}
+
+We can expand this double summation to get the following expression of the log-likelihood function:
+
+\begin{equation}
+\begin{split}
+\log\mathcal{L}(p_0,p_1,...,p_M\vert x) & = \left(\sum_{i=1}^N \mathbbm{1}[x_i=0]\right)\log p_0 + \left(\sum_{i=1}^N \mathbbm{1}[x_i=1]\right)\log p_1 + ... \\
+& + \left(\sum_{i=1}^N \mathbbm{1}[x_i=M]\right)\log p_M 
+\end{split}
+\end{equation}
+
+As we see, the log-likelihood function can be interpreted as the weighted sum of the log of parameters where weights are equal to all events where the outcome ocurred.
+
+\subsection{MLE}
+
+We aim to maximize the value of the log-likelihood function subject to the natural constraint that claims parameters must add up to $1$. Essentially, there are two ways to solve this problem: the analytical and the numerical approach. At first, we derive and discuss some results under the analytical approach but in practice we use the numerical procedure since variance computations require working with a Hessian matrix which is hard to handle under the analytical approach.
+
+\begin{equation}
+\begin{aligned}
+\max_{p_0,p_1,...,p_M} \quad & \log\mathcal{L}(p_0,p_1,...,p_M\vert x) \\
+\textrm{s.t.} \quad & \sum_{j=0}^M p_j = 1\\
+  & p_0,p_1,...,p_M\in [0,1] \\
+\end{aligned}
+\end{equation}
+
+This problem resembles the non-linear programming under equality constraints. By using Lagrange Multipliers (LM) we can obtain first order conditions (FOC) for every parameter $p_j$, and by including the parameter restriction per se we can obtain the maximum likelihood estimator for $p_j$, denoted as $\hat{p}_j$:
+
+\begin{equation}
+\hat{p}_j = \dfrac{\sum_{i=1}^N \mathbbm{1}[x_i=j]}{N}
+\end{equation}
+
+As you can see, the MLE for $p_j$ is the mean of the related outcome in the sample. It is worth noting that we are not interested on these probabilities per se but instead we want to get an estimate of the average value of the count variable that takes a finite number of outcomes. As with every discrete random variable we define the mean value of such variable as follow:
+
+\begin{equation}
+\mathbf{\hat{E}}(x) = \hat{p}_0\times 0 + \hat{p}_1\times 1 + ... + \hat{p}_M\times M = \sum_{j=0}^{M} \hat{p}_j\times j
+\end{equation}
+
+Now, we want to discuss how much confident is the measure $\mathbf{\hat{E}}(x)$. In order to do so, we delve into variance estimation issues in the MLE approach. In particular, we aim to get a confidence interval for $\mathbf{\hat{E}}(x)$ rather than $\hat{p}_j$. However, keep in mind that $\mathbf{\hat{E}}(x)$ is a function of $\hat{p}_j$.
+
+\subsection{Variance Estimation and Confidence Intervals}
+The maximum likelihood estimator has desirable asymptotic properties given that we work with a large sample size. It is consistent (it converges in probability to the population parameter), asymptotically normally distributed and asymptotically efficient (it reaches the minimal variance attainable by all consistent estimators, this is known as the Cramer-Rao lower bound). We summarize these properties as follows:
+
+\begin{equation}
+\begin{split}
+& \plim_{n\to \infty} \hat{\textbf{p}} = \textbf{p} \\
+& \hat{\textbf{p}} \overset{a}{\to} \mathcal{N}\left[\textbf{p},\textbf{I}\left(\textbf{p}\right)^{-1}\right] \\
+& \textbf{I}\left(\textbf{p}\right) = -E\left[\dfrac{\partial^2 \log\mathcal{L}}{\partial \textbf{p} \partial \textbf{p}^{T}} \right] \\
+\end{split}
+\end{equation}
+
+where $n$ is the sample size, and $\textbf{I}\left(\textbf{p}\right)$ is the information matrix. This matrix is equal to the expected value of the Hessian matrix associated to the optimization problem and evaluated at the population parameter vector $\textbf{p} = p_0,p_1,...,p_M$. We must note it is difficult to obtain $\textbf{I}\left(\textbf{p}\right)$ not only because we need to obtain the analytical form of a Hessian matrix (which entails calculating second and cross derivatives) but also because we need to do so many times in order to obtain its expected value. In practice we retain the negative of the numerical Hessian matrix associated to the MLE and treat it as an estimate of $\textbf{I}\left(\textbf{p}\right)$. In turn, we treat the inverse of such matrix as an estimate of the covariance matrix for estimator vector $\hat{\textbf{p}}$.
+
+
+\subsubsection{The Delta Method}
+As you may remember, we are not interested in obtaining a CI for an arbitrary parameter $\hat{p}_j$ but rather we aim to obtain a CI for $\mathbf{\hat{E}}(x)$. One way to do so is by using the Delta Method for the multivariate case: To keep using the same notation, suppose we have a vector of $M+1$ estimates, called $\hat{\textbf{p}}=(\hat{p}_0,\hat{p}_1,...,\hat{p}_M)$, and their related covariance matrix, called $\textbf{I}\left(\textbf{p}\right)^{-1}$. We aim to find the covariance matrix of a vector of estimators that are a set of functions of the raw vector estimators, say $\textbf{f}(\hat{\textbf{p}})$. If $\textbf{f}(\cdot)$ is a set of $C^1$ functions and $\hat{\textbf{p}}$ is normally distributed as in equation $(8)$ then:
+
+\begin{equation}
+\textbf{f}(\hat{\textbf{p}}) \overset{a}{\to} \mathcal{N}\left[\textbf{f}(\textbf{p}),\textbf{f'}(\textbf{p})\textbf{I}\left(\textbf{p}\right)^{-1}\textbf{f'}(\textbf{p})^{T}\right]
+\end{equation}
+
+where $\textbf{f'}(\textbf{p})$ is the Jacobian matrix of first derivatives of every new estimator w.r.t each raw estimator. Since $\mathbf{\hat{E}}(x)$ is a function of raw parameters $\hat{p}_j$, then we can use the Delta Method to provide a CI for $\mathbf{\hat{E}}(x)$. Once we obtain a standard deviation for $\mathbf{\hat{E}}(x)$, say $\sigma$, we use the following formula for the CI of a normal distribution:
+
+\begin{equation}
+CI(\mathbf{\hat{E}}(x)) = \mathbf{\hat{E}}(x) \pm z^{*}_{\alpha /2}\dfrac{\sigma}{\sqrt n}
+\end{equation}
+
+where $z^{*}_{\alpha /2}$ is the critical value of the standard normal distribution for a Type I error level of $\alpha$ and $n$ is the sample size. The alternative is to use the bootstrapping method which we discuss in the next section.
+
+\newpage
+
+\subsubsection{The Bootstrapping Method}
+
+\end{document}
